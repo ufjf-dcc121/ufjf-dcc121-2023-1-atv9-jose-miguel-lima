@@ -47,6 +47,9 @@
             console.log(nomeCompleto);
 
             mensagem.innerHTML = `Olá <span> ${nomeCompleto} </span>!`;
+
+            form.reset();   //limpa os inputs
+            form.nome.focus();  //coloca o foco no primeiro input novamente
         }
 
     </script>
