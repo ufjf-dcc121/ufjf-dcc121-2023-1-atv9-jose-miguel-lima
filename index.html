@@ -6,8 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semana 9: Forms</title>
     <style>
-        p>span {
+        .pessoa > div{
             color: darkgreen;
+            display: inline;
+        }
+        .pessoa > .idade {
+            color: darkred;
+        }
+        div.sobrenome {
+            color: darkblue;
+        }
+        .sobrenome::before {
+            content : ' ';
+        }
+        .idade::before {
+            color:black;
+            content: ', ';
         }
     </style>
 </head>
@@ -28,7 +42,11 @@
 
         </form>
         <p></p>
-    
+
+        <h2>Visitas passadas:</h2>
+        
+        <ol></ol>
+
     </main>
 
     <script>
@@ -36,6 +54,7 @@
         form.addEventListener("submit", aoEnviar);
         
         const mensagem = document.querySelector("p");
+        const ol = document.querySelector("ol");
         
         function aoEnviar(evento){
             evento.preventDefault();
@@ -50,8 +69,35 @@
 
             form.reset();   //limpa os inputs
             form.nome.focus();  //coloca o foco no primeiro input novamente
-        }
 
+            
+            adicionaPessoa(nome, sobrenome, idade);
+        }
+        
+        function adicionaPessoa(nome, sobrenome, idade) {
+            const li = document.createElement("li");    //cria novo item de lista
+            const divPessoa = document.createElement('div');
+            divPessoa.classList.add("pessoa");
+            
+            const spanNome =document.createElement('div');
+            spanNome.classList.add('nome');
+            spanNome.textContent = nome;
+            divPessoa.appendChild(spanNome);
+
+            const spanSobrenome =document.createElement('div');
+            spanSobrenome.classList.add('sobrenome');
+            spanSobrenome.textContent = sobrenome;
+            divPessoa.appendChild(spanSobrenome);
+
+            const spanIdade =document.createElement('div');
+            spanIdade.classList.add('idade');
+            spanIdade.textContent = idade;
+            divPessoa.appendChild(spanIdade);
+            
+            li.appendChild(divPessoa);  //divPessoa é filho de li
+            ol.appendChild(li);     //diz que li é filho de ol
+            
+        }
     </script>
     
 </body>
